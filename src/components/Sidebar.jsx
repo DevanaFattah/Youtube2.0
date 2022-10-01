@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { categories } from '../utils/constants'
 
-const selectedCategory = 'New';
-
-const Sidebar = () => (
+const Sidebar = ({ selectedCategory, setSelectedCategory }) => (
     <Stack
         direction='row'
         sx={{ 
@@ -24,12 +22,27 @@ const Sidebar = () => (
             <button
                 className='category-btn'
                 style={{ 
-                    backgroundColor: selectedCategory === category.name && ('#EFEFEF'),
+                    backgroundColor: selectedCategory === category.name && ('#FC1503'),
                     color: 'white'
                 }}
+                key={category.name}
+                onClick={() => {setSelectedCategory(category.name)}}
             >
-                <span>{category.icon}</span>
-                <span>{category.name}</span>
+                <span
+                    style={{ 
+                        color: selectedCategory !== category.name ? 'red' : 'white',
+                        marginRight: '15px'
+                    }}
+                >
+                    {category.icon}
+                </span>
+                <span
+                    style={{ 
+                        opacity: selectedCategory === category.name ? '1' : '0.8'
+                    }}
+                >
+                    {category.name}
+                </span>
             </button> 
         ))}
     </Stack>
